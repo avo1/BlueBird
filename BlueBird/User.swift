@@ -16,7 +16,7 @@ let userLogoutNotification = "userLogoutNotification"
 class User: NSObject {
   var name: String?
   var screenName: String?
-  var profileImangeURL: String?
+  var profileImageURL: NSURL?
   var tagline: String?
   var dictionary: NSDictionary
   
@@ -24,8 +24,14 @@ class User: NSObject {
     self.dictionary = dictionary
     name = dictionary["name"] as? String
     screenName = dictionary["screen_name"] as? String
-    profileImangeURL = dictionary["profile_image_url"] as? String
     tagline = dictionary["description"] as? String
+    
+    let profileImageURLString = dictionary["profile_image_url"] as? String
+    if profileImageURLString != nil {
+      profileImageURL = NSURL(string: profileImageURLString!)!
+    } else {
+      profileImageURL = nil
+    }
   }
   
   func logout() {
@@ -40,13 +46,9 @@ class User: NSObject {
     if _currentUser == nil {
     let data = NSUserDefaults.standardUserDefaults().objectForKey(keyCurrentUser) as? NSData
     if data != nil {
-    var dictionary: NSDictionary!
-    do {
-    dictionary = try NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as! NSDictionary
+    let dictionary = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as! NSDictionary
     _currentUser = User(dictionary: dictionary)
-  } catch {
-    // Failed to parse JSON
-    }
+    
     }
     }
     return _currentUser
@@ -55,13 +57,8 @@ class User: NSObject {
     set(user) {
       _currentUser = user
       if _currentUser != nil {
-        var data: NSData!
-        do {
-          data = try NSJSONSerialization.dataWithJSONObject(user!.dictionary, options: NSJSONWritingOptions())
-          NSUserDefaults.standardUserDefaults().setObject(data, forKey: keyCurrentUser)
-        } catch {
-          // Failed to parse JSON
-        }
+        let data = try! NSJSONSerialization.dataWithJSONObject(user!.dictionary, options: NSJSONWritingOptions())
+        NSUserDefaults.standardUserDefaults().setObject(data, forKey: keyCurrentUser)
       } else {
         NSUserDefaults.standardUserDefaults().setObject(nil, forKey: keyCurrentUser)
       }

@@ -18,11 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     // Override point for customization after application launch.
     
+    // Appearance
+    UINavigationBar.appearance().barTintColor = MyColors.navigationTintColor
+    UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+    UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+    
+    // Select 1st view
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userLogoutNotification, object: nil)
     
     if User.currentUser != nil {
       print("current user detected \(User.currentUser?.name)")
-      let vc = storyBoard.instantiateViewControllerWithIdentifier("TweetsViewController") as UIViewController
+      let vc = storyBoard.instantiateViewControllerWithIdentifier("navController") as UIViewController
       window?.rootViewController = vc
     }
     return true
