@@ -20,7 +20,7 @@ class Tweet: NSObject {
   var favCount = 0
   var isRetweeted = false
   var retweetedBy: String?
-  var tweetId: Int64?
+  var tweetId: NSNumber?
   var tweetIdStr: String?
   
   //retweeted_status: if avail -> retweeted
@@ -49,6 +49,7 @@ class Tweet: NSObject {
     
     iLikeIt = (dictionary["favorited"] as? Bool)!
     iRetweetIt = (dictionary["retweeted"] as? Bool)!
+    tweetId = NSNumber(longLong: Int64(tweetIdStr!)!)
     
     let formatter = NSDateFormatter()
     formatter.dateFormat = "EEE MMM d HH:mm:ss Z y"

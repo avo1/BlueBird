@@ -9,11 +9,6 @@
 import UIKit
 import AFNetworking
 
-@objc protocol TweetCellDelegate {
-  optional func tweetCell(tweetCell: TweetCell, didChangeFavValue value: Bool)
-  optional func tweetCell(tweetCell: TweetCell, didChangeRetweetValue value: Bool)
-}
-
 class TweetCell: UITableViewCell {
   
   @IBOutlet weak var avatarImageView: UIImageView!
@@ -30,7 +25,8 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var retweetedImageHeight: NSLayoutConstraint!
   @IBOutlet weak var retweetedImageToAvatar: NSLayoutConstraint!
   
-  weak var delegate: TweetCellDelegate?
+  //weak var delegate: TweetCellDelegate?
+  var tweetId: NSNumber!
   
   var tweet: Tweet! {
     didSet {
@@ -50,25 +46,9 @@ class TweetCell: UITableViewCell {
       
       // If this is my post (not my retweet) then disable retweet
       retweetButton.enabled = (tweet.user?.screenName != User.currentUser?.screenName) || tweet.isRetweeted
-      if tweet.iRetweetIt {
-        retweetButton.setImage(UIImage(named: "retweet_on"), forState: UIControlState.Normal)
-        retweetCountLabel.textColor = MyColors.greenOfRetweetCount
-      } else {
-        retweetButton.setImage(UIImage(named: "retweet"), forState: UIControlState.Normal)
-        retweetCountLabel.textColor = UIColor.lightGrayColor()
-      }
-      retweetCountLabel.text = "\(tweet.retweetCount)"
-      retweetCountLabel.hidden = !(tweet.retweetCount > 0)
       
-      if tweet.iLikeIt {
-        favButton.setImage(UIImage(named: "like_on"), forState: UIControlState.Normal)
-        favCountLabel.textColor = MyColors.redOfFavCount
-      } else {
-        favButton.setImage(UIImage(named: "like"), forState: UIControlState.Normal)
-        favCountLabel.textColor = UIColor.lightGrayColor()
-      }
-      favCountLabel.text = "\(tweet.favCount)"
-      favCountLabel.hidden = !(tweet.favCount > 0)
+      setRetweetCountLabel(tweet.retweetCount, retweeted: tweet.iRetweetIt)
+      setFavCountLabel(tweet.favCount, liked: tweet.iLikeIt)
       
       if !tweet.isRetweeted {
         retweetedByLabel.hidden = true
@@ -78,7 +58,32 @@ class TweetCell: UITableViewCell {
         retweetedByLabel.text = tweet.retweetedBy! + " retweeted"
       }
       
+      tweetId = tweet.tweetId
     }
+  }
+  
+  func setRetweetCountLabel(count: Int, retweeted: Bool) {
+    if retweeted {
+      retweetButton.setImage(UIImage(named: "retweet_on"), forState: UIControlState.Normal)
+      retweetCountLabel.textColor = MyColors.greenOfRetweetCount
+    } else {
+      retweetButton.setImage(UIImage(named: "retweet"), forState: UIControlState.Normal)
+      retweetCountLabel.textColor = UIColor.lightGrayColor()
+    }
+    retweetCountLabel.text = "\(count)"
+    retweetCountLabel.hidden = !(count > 0)
+  }
+  
+  func setFavCountLabel(count: Int, liked: Bool) {
+    if liked {
+      favButton.setImage(UIImage(named: "like_on"), forState: .Normal)
+      favCountLabel.textColor = MyColors.redOfFavCount
+    } else {
+      favButton.setImage(UIImage(named: "like"), forState: .Normal)
+      favCountLabel.textColor = UIColor.lightGrayColor()
+    }
+    favCountLabel.text = "\(count)"
+    favCountLabel.hidden = !(count > 0)
   }
   
   override func awakeFromNib() {
@@ -95,27 +100,33 @@ class TweetCell: UITableViewCell {
   }
   
   @IBAction func onFavValueChange(sender: UIButton) {
-    var v: Bool
     if sender.imageView?.image == UIImage(named: "like_on") {
       sender.setImage(UIImage(named: "like"), forState: UIControlState.Normal)
-      v = false
+      // Unlike it
+      TwitterClient.sharedInstance.unlikeStatus(["id" : tweetId])
+      setFavCountLabel(Int(favCountLabel.text!)! - 1, liked: false)
     } else {
       sender.setImage(UIImage(named: "like_on"), forState: UIControlState.Normal)
-      v = true
+      // Like it
+      TwitterClient.sharedInstance.likeStatus(["id" : tweetId])
+      setFavCountLabel(Int(favCountLabel.text!)! + 1, liked: true)
     }
-    delegate?.tweetCell?(self, didChangeFavValue: v)
   }
   
   @IBAction func onRetweetValueChange(sender: UIButton) {
-    var v: Bool
     if sender.imageView?.image == UIImage(named: "retweet_on") {
       sender.setImage(UIImage(named: "retweet"), forState: UIControlState.Normal)
-      v = false
+      // Unretweet it
     } else {
       sender.setImage(UIImage(named: "retweet_on"), forState: UIControlState.Normal)
-      v = true
+      // Retweet it
+      TwitterClient.sharedInstance.retweetStatus(tweetId, completion: { (response, error) -> () in
+        if response != nil {
+          self.setRetweetCountLabel(Int(self.retweetCountLabel.text!)! + 1, retweeted: true)
+        }
+      })
     }
-    delegate?.tweetCell?(self, didChangeRetweetValue: v)
+    //delegate?.tweetCell?(self, didChangeRetweetValue: v)
   }
   
 }

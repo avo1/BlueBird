@@ -66,7 +66,7 @@ class TweetsViewController: UIViewController {
   
 }
 
-extension TweetsViewController: UITableViewDataSource, UITableViewDelegate, TweetCellDelegate {
+extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return tweets.count
@@ -76,7 +76,6 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate, Twee
     let cell = tableView.dequeueReusableCellWithIdentifier("tweetCell") as! TweetCell
     
     cell.tweet = tweets[indexPath.row]
-    cell.delegate = self
     
     return cell
   }

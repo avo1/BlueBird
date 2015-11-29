@@ -63,11 +63,32 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     }
   }
   
+  // MARK: Retweet
+  func retweetStatus(id: NSNumber, completion: (response: AnyObject?, error: NSError?) -> ()) {
+    POST("1.1/statuses/retweet/\(id).json", parameters: nil, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+      print("status retweeted")
+      completion(response: response, error: nil)
+      
+      }, failure: { (operation: AFHTTPRequestOperation?, error: NSError!) -> Void in
+        print("failed to retweet: \(error)")
+        completion(response: nil, error: error)
+    })
+  }
+  
+  // MARK: Favorite
   func likeStatus(params: NSDictionary) {
     POST("1.1/favorites/create.json", parameters: params, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
       print("status liked")
       }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
         print("failed to like status \(error)")
+    }
+  }
+  
+  func unlikeStatus(params: NSDictionary) {
+    POST("1.1/favorites/destroy.json", parameters: params, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+      print("status unliked")
+      }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+        print("failed to unlike status \(error)")
     }
   }
   
