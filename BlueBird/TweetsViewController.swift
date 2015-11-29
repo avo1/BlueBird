@@ -50,6 +50,10 @@ class TweetsViewController: UIViewController {
     User.currentUser?.logout()
   }
   
+  @IBAction func onNewTweet(sender: UIBarButtonItem) {
+    self.performSegueWithIdentifier("newTweetSegue", sender: self)
+  }
+  
   /*
   // MARK: - Navigation
   
@@ -62,7 +66,7 @@ class TweetsViewController: UIViewController {
   
 }
 
-extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
+extension TweetsViewController: UITableViewDataSource, UITableViewDelegate, TweetCellDelegate {
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return tweets.count
@@ -72,6 +76,7 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
     let cell = tableView.dequeueReusableCellWithIdentifier("tweetCell") as! TweetCell
     
     cell.tweet = tweets[indexPath.row]
+    cell.delegate = self
     
     return cell
   }

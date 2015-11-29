@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		183CBE061C0AE82A00FFA84D /* NewTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183CBE051C0AE82A00FFA84D /* NewTweetViewController.swift */; };
 		187FA4941C037565004919BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FA4931C037565004919BD /* AppDelegate.swift */; };
 		187FA4961C037565004919BD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FA4951C037565004919BD /* LoginViewController.swift */; };
 		187FA4991C037565004919BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187FA4971C037565004919BD /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		183CBE051C0AE82A00FFA84D /* NewTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTweetViewController.swift; sourceTree = "<group>"; };
 		187FA4901C037565004919BD /* BlueBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		187FA4931C037565004919BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		187FA4951C037565004919BD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 		18E179DA1C04CDF70050BBF0 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				183CBE051C0AE82A00FFA84D /* NewTweetViewController.swift */,
 				187FA4951C037565004919BD /* LoginViewController.swift */,
 				18E179DB1C04CE150050BBF0 /* TweetsViewController.swift */,
 			);
@@ -270,6 +273,7 @@
 				187FA4961C037565004919BD /* LoginViewController.swift in Sources */,
 				18E179D41C037AD80050BBF0 /* TwitterClient.swift in Sources */,
 				18A13BFE1C06122D00954B55 /* MyColors.swift in Sources */,
+				183CBE061C0AE82A00FFA84D /* NewTweetViewController.swift in Sources */,
 				187FA4941C037565004919BD /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

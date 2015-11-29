@@ -55,6 +55,22 @@ class TwitterClient: BDBOAuth1RequestOperationManager {
     
   }
   
+  func postNewStatus(params: NSDictionary) {
+    POST("1.1/statuses/update.json", parameters: params, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+      print("status posted")
+      }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+        print("failed to post status \(error)")
+    }
+  }
+  
+  func likeStatus(params: NSDictionary) {
+    POST("1.1/favorites/create.json", parameters: params, success: { (operation: AFHTTPRequestOperation, response: AnyObject) -> Void in
+      print("status liked")
+      }) { (operation: AFHTTPRequestOperation?, error: NSError) -> Void in
+        print("failed to like status \(error)")
+    }
+  }
+  
   func openURL(url: NSURL) {
     fetchAccessTokenWithPath("oauth/access_token", method: "POST", requestToken: BDBOAuth1Credential(queryString: url.query), success: { (accessToken: BDBOAuth1Credential!) -> Void in
       print("get access token")

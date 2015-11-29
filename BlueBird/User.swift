@@ -48,7 +48,6 @@ class User: NSObject {
     if data != nil {
     let dictionary = try! NSJSONSerialization.JSONObjectWithData(data!, options: NSJSONReadingOptions()) as! NSDictionary
     _currentUser = User(dictionary: dictionary)
-    
     }
     }
     return _currentUser
