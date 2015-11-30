@@ -55,7 +55,15 @@ class TweetCell: UITableViewCell {
         retweetedImageHeight.constant = 0
         retweetedImageToAvatar.constant = 0
       } else {
-        retweetedByLabel.text = tweet.retweetedBy! + " retweeted"
+        retweetedByLabel.hidden = false
+        retweetedImageHeight.constant = 18
+        retweetedImageToAvatar.constant = 2
+        if tweet.retweetedBy! == User.currentUser?.name {
+          retweetedByLabel.text = "You retweeted"
+        } else {
+          retweetedByLabel.text = tweet.retweetedBy! + " retweeted"
+        }
+        
       }
       
       tweetId = tweet.tweetId
@@ -101,24 +109,38 @@ class TweetCell: UITableViewCell {
   
   @IBAction func onFavValueChange(sender: UIButton) {
     if sender.imageView?.image == UIImage(named: "like_on") {
-      sender.setImage(UIImage(named: "like"), forState: UIControlState.Normal)
       // Unlike it
-      TwitterClient.sharedInstance.unlikeStatus(["id" : tweetId])
-      setFavCountLabel(Int(favCountLabel.text!)! - 1, liked: false)
+      TwitterClient.sharedInstance.unlikeStatus(["id" : tweetId], completion: { (response, error) -> () in
+        self.setFavCountLabel(Int(self.favCountLabel.text!)! - 1, liked: false)
+      })
+      
     } else {
-      sender.setImage(UIImage(named: "like_on"), forState: UIControlState.Normal)
       // Like it
-      TwitterClient.sharedInstance.likeStatus(["id" : tweetId])
-      setFavCountLabel(Int(favCountLabel.text!)! + 1, liked: true)
+      TwitterClient.sharedInstance.likeStatus(["id" : tweetId], completion: { (response, error) -> () in
+        self.setFavCountLabel(Int(self.favCountLabel.text!)! + 1, liked: true)
+      })
     }
   }
   
   @IBAction func onRetweetValueChange(sender: UIButton) {
     if sender.imageView?.image == UIImage(named: "retweet_on") {
-      sender.setImage(UIImage(named: "retweet"), forState: UIControlState.Normal)
+      
       // Unretweet it
+      var retweetedId: NSNumber?
+      TwitterClient.sharedInstance.getRetweetedId(tweetId, completion: { (response, error) -> () in
+        if response != nil {
+          retweetedId = response as? NSNumber
+          
+          TwitterClient.sharedInstance.unretweet(retweetedId!, completion: { (response, error) -> () in
+            if response != nil {
+              self.setRetweetCountLabel(Int(self.retweetCountLabel.text!)! - 1, retweeted: false)
+            }
+          })
+        }
+      })
+      
     } else {
-      sender.setImage(UIImage(named: "retweet_on"), forState: UIControlState.Normal)
+      
       // Retweet it
       TwitterClient.sharedInstance.retweetStatus(tweetId, completion: { (response, error) -> () in
         if response != nil {
@@ -126,7 +148,6 @@ class TweetCell: UITableViewCell {
         }
       })
     }
-    //delegate?.tweetCell?(self, didChangeRetweetValue: v)
   }
   
 }

@@ -1,5 +1,5 @@
 //
-//  TweetsViewController.swift
+//  TimelineViewController.swift
 //  BlueBird
 //
 //  Created by Dave Vo on 11/24/15.
@@ -9,7 +9,7 @@
 import UIKit
 import MBProgressHUD
 
-class TweetsViewController: UIViewController {
+class TimelineViewController: UIViewController {
   
   var tweets = [Tweet]()
   var refreshControl = UIRefreshControl()
@@ -54,19 +54,19 @@ class TweetsViewController: UIViewController {
     self.performSegueWithIdentifier("newTweetSegue", sender: self)
   }
   
-  /*
   // MARK: - Navigation
   
-  // In a storyboard-based application, you will often want to do a little preparation before navigation
   override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-  // Get the new view controller using segue.destinationViewController.
-  // Pass the selected object to the new view controller.
+    if segue.identifier == "tweetSegue" {
+      let tweetVC: TweetViewController = segue.destinationViewController as! TweetViewController
+      let data = sender as! Tweet
+      tweetVC.tweet = data
+    }
   }
-  */
   
 }
 
-extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
+extension TimelineViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return tweets.count
@@ -78,5 +78,10 @@ extension TweetsViewController: UITableViewDataSource, UITableViewDelegate {
     cell.tweet = tweets[indexPath.row]
     
     return cell
+  }
+  
+  func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    let tweet = tweets[indexPath.row]
+    performSegueWithIdentifier("tweetSegue", sender: tweet)
   }
 }

@@ -68,9 +68,14 @@ class NewTweetViewController: UIViewController {
   
   @IBAction func onTweetButtonTapped(sender: UIButton) {
     let params = ["status" : messageTextView.text]
-    TwitterClient.sharedInstance.postNewStatus(params)
-    // What if fail to post?
-    dismissViewControllerAnimated(true, completion: nil)
+    TwitterClient.sharedInstance.postNewStatus(params) { (response, error) -> () in
+      if response != nil {
+        self.dismissViewControllerAnimated(true, completion: nil)
+      } else {
+        // What if fail to post?
+      }
+    }
+    
   }
 }
 

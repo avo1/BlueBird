@@ -57,7 +57,7 @@ class Tweet: NSObject {
     
     let elapsedTime = NSDate().timeIntervalSinceDate(createdAt!)
     if elapsedTime < 60 {
-      timeSinceCreated = String(elapsedTime) + "s"
+      timeSinceCreated = String(Int(elapsedTime)) + "s"
     } else if elapsedTime < 3600 {
       timeSinceCreated = String(Int(elapsedTime / 60)) + "m"
     } else if elapsedTime < 24*3600 {

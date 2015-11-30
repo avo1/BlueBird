@@ -19,9 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Override point for customization after application launch.
     
     // Appearance
-    UINavigationBar.appearance().barTintColor = MyColors.navigationTintColor
-    UINavigationBar.appearance().tintColor = UIColor.whiteColor()
-    UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+    //    UINavigationBar.appearance().barTintColor = MyColors.navigationTintColor
+    //    UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+    //    UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
     
     // Select 1st view
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userLogoutNotification, object: nil)
