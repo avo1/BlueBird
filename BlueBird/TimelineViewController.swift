@@ -14,6 +14,8 @@ class TimelineViewController: UIViewController {
   var tweets = [Tweet]()
   var refreshControl = UIRefreshControl()
   var selectedTweetIndex: Int!
+  var isLoadingNextPage = false
+  var loadingView: UIActivityIndicatorView!
   
   @IBOutlet weak var tableView: UITableView!
   
@@ -33,6 +35,13 @@ class TimelineViewController: UIViewController {
     refreshControl.addTarget(self, action: Selector("fetchTimeline"), forControlEvents: UIControlEvents.ValueChanged)
     tableView.addSubview(refreshControl)
     
+    // Add the activity Indicator for table footer for infinity load
+    let tableFooterView = UIView(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, 50))
+    loadingView = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.Gray)
+    loadingView.center = tableFooterView.center
+    loadingView.hidesWhenStopped = true
+    tableFooterView.addSubview(loadingView)
+    
     // Just call the HUD once
     MBProgressHUD.showHUDAddedTo(self.view, animated: true)
     fetchTimeline()
@@ -45,10 +54,29 @@ class TimelineViewController: UIViewController {
   }
   
   func fetchTimeline() {
-    TwitterClient.sharedInstance.homeTimelineWithParams(nil, completion: { (tweets, error) -> () in
-      self.tweets = tweets!
-      self.tableView.reloadData()
+    var params = [String: AnyObject]()
+    
+    if isLoadingNextPage {
+      let c = tweets.count
+      if c > 0 {
+        let id = tweets[c-1].tweetId!.longLongValue - 1
+        params["max_id"] = NSNumber(longLong: id)
+      }
+    } else {
+      tweets.removeAll()
+    }
+    
+    TwitterClient.sharedInstance.homeTimelineWithParams(params, completion: { (tweets, error) -> () in
+      if tweets != nil {
+        for tweet in tweets! {
+          self.tweets.append(tweet)
+        }
+        self.tableView.reloadData()
+      }
+      
       self.refreshControl.endRefreshing()
+      self.loadingView.stopAnimating()
+      self.isLoadingNextPage = false
       MBProgressHUD.hideHUDForView(self.view, animated: true)
     })
   }
@@ -95,6 +123,15 @@ extension TimelineViewController: UITableViewDataSource, UITableViewDelegate, Tw
     
     cell.tweet = tweets[indexPath.row]
     cell.delegate = self
+    
+    // Infinite load if last cell
+    if !isLoadingNextPage {
+      if indexPath.row == tweets.count - 1 {
+        loadingView.startAnimating()
+        isLoadingNextPage = true
+        fetchTimeline()
+      }
+    }
     
     return cell
   }
