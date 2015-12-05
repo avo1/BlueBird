@@ -86,12 +86,10 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-BlueBird/AFNetworking.framework"
   install_framework "Pods-BlueBird/BDBOAuth1Manager.framework"
-  install_framework "Pods-BlueBird/Cartography.framework"
   install_framework "Pods-BlueBird/MBProgressHUD.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-BlueBird/AFNetworking.framework"
   install_framework "Pods-BlueBird/BDBOAuth1Manager.framework"
-  install_framework "Pods-BlueBird/Cartography.framework"
   install_framework "Pods-BlueBird/MBProgressHUD.framework"
 fi

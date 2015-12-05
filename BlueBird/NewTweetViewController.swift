@@ -8,6 +8,10 @@
 
 import UIKit
 
+@objc protocol NewTweetViewControllerDelegate {
+  optional func newTweetViewController(newTweetViewController: NewTweetViewController, newTweet: Tweet)
+}
+
 class NewTweetViewController: UIViewController {
   
   @IBOutlet weak var avatarImageView: UIImageView!
@@ -17,6 +21,8 @@ class NewTweetViewController: UIViewController {
   @IBOutlet weak var keyboardView: UIView!
   @IBOutlet weak var keyboardViewHeight: NSLayoutConstraint!
   @IBOutlet weak var questionLabel: UILabel!
+  
+  weak var delegate: NewTweetViewControllerDelegate?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -55,21 +61,27 @@ class NewTweetViewController: UIViewController {
   @IBAction func cancelTweet(sender: UIButton) {
     messageTextView.resignFirstResponder()
     
-    let alertMessage = UIAlertController()
-    let deleteAction = UIAlertAction(title: "Delete", style: UIAlertActionStyle.Destructive) { action in self.dismissViewControllerAnimated(true, completion: nil)
+    // If nothing then no need to confirm for deletion
+    if messageTextView.text == "" {
+      self.dismissViewControllerAnimated(true, completion: nil)
+    } else {
+      let alertMessage = UIAlertController()
+      let deleteAction = UIAlertAction(title: "Delete", style: UIAlertActionStyle.Destructive) { action in self.dismissViewControllerAnimated(true, completion: nil)
+      }
+      let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { action in self.messageTextView.becomeFirstResponder()
+      }
+      
+      alertMessage.addAction(deleteAction)
+      alertMessage.addAction(cancelAction)
+      self.presentViewController(alertMessage, animated: true, completion: nil)
     }
-    let cancelAction = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel) { action in self.messageTextView.becomeFirstResponder()
-    }
-    
-    alertMessage.addAction(deleteAction)
-    alertMessage.addAction(cancelAction)
-    self.presentViewController(alertMessage, animated: true, completion: nil)
   }
   
   @IBAction func onTweetButtonTapped(sender: UIButton) {
     let params = ["status" : messageTextView.text]
     TwitterClient.sharedInstance.postNewStatus(params) { (response, error) -> () in
       if response != nil {
+        self.delegate!.newTweetViewController!(self, newTweet: Tweet(dictionary: response as! NSDictionary))
         self.dismissViewControllerAnimated(true, completion: nil)
       } else {
         // What if fail to post?

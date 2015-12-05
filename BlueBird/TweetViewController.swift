@@ -8,6 +8,10 @@
 
 import UIKit
 
+@objc protocol TweetViewControllerDelegate {
+  optional func tweetViewController(tweetViewController: TweetViewController, newTweet: Tweet)
+}
+
 class TweetViewController: UIViewController {
   
   @IBOutlet weak var tableView: UITableView!
@@ -22,6 +26,7 @@ class TweetViewController: UIViewController {
   
   var kbHeight: CGFloat!
   var screenName: String!
+  weak var delegate: TweetViewControllerDelegate?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -47,6 +52,8 @@ class TweetViewController: UIViewController {
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "keyboardHiden:", name: UIKeyboardDidHideNotification, object: nil)
     messageTextView.delegate = self
+    
+    
   }
   
   func keyboardShown(notification: NSNotification) {
@@ -75,19 +82,9 @@ class TweetViewController: UIViewController {
     }
   }
   
-  /*
-  // MARK: - Navigation
-  
-  // In a storyboard-based application, you will often want to do a little preparation before navigation
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-  // Get the new view controller using segue.destinationViewController.
-  // Pass the selected object to the new view controller.
-  }
-  */
-  
 }
 
-extension TweetViewController: UITableViewDataSource, UITableViewDelegate {
+extension TweetViewController: UITableViewDataSource, UITableViewDelegate, TweetCellDelegate {
   func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 1
   }
@@ -96,8 +93,23 @@ extension TweetViewController: UITableViewDataSource, UITableViewDelegate {
     let cell = tableView.dequeueReusableCellWithIdentifier("tweetCell") as! TweetCell
     
     cell.tweet = tweet
+    cell.delegate = self
     
     return cell
+  }
+  
+  func tweetCell(tweetCell: TweetCell, didChangeFav value: Bool, favCount: Int) {
+    print("Tweeet detail: fav changed to \(value)")
+    tweet?.iLikeIt = value
+    tweet?.favCount = favCount
+    delegate!.tweetViewController!(self, newTweet: tweet!)
+  }
+  
+  func tweetCell(tweetCell: TweetCell, didChangeRetweet value: Bool, retweetCount: Int) {
+    print("Tweet detail: retweet changed to \(value)")
+    tweet?.iRetweetIt = value
+    tweet?.retweetCount = retweetCount
+    delegate!.tweetViewController!(self, newTweet: tweet!)
   }
 }
 

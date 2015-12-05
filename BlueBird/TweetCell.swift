@@ -9,6 +9,11 @@
 import UIKit
 import AFNetworking
 
+@objc protocol TweetCellDelegate {
+  optional func tweetCell(tweetCell: TweetCell, didChangeFav value: Bool, favCount: Int)
+  optional func tweetCell(tweetCell: TweetCell, didChangeRetweet value: Bool, retweetCount: Int)
+}
+
 class TweetCell: UITableViewCell {
   
   @IBOutlet weak var avatarImageView: UIImageView!
@@ -25,7 +30,7 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var retweetedImageHeight: NSLayoutConstraint!
   @IBOutlet weak var retweetedImageToAvatar: NSLayoutConstraint!
   
-  //weak var delegate: TweetCellDelegate?
+  weak var delegate: TweetCellDelegate?
   var tweetId: NSNumber!
   
   var tweet: Tweet! {
@@ -111,13 +116,17 @@ class TweetCell: UITableViewCell {
     if sender.imageView?.image == UIImage(named: "like_on") {
       // Unlike it
       TwitterClient.sharedInstance.unlikeStatus(["id" : tweetId], completion: { (response, error) -> () in
-        self.setFavCountLabel(Int(self.favCountLabel.text!)! - 1, liked: false)
+        let count = Int(self.favCountLabel.text!)! - 1
+        self.setFavCountLabel(count, liked: false)
+        self.delegate?.tweetCell?(self, didChangeFav: false, favCount: count)
       })
       
     } else {
       // Like it
       TwitterClient.sharedInstance.likeStatus(["id" : tweetId], completion: { (response, error) -> () in
-        self.setFavCountLabel(Int(self.favCountLabel.text!)! + 1, liked: true)
+        let count = Int(self.favCountLabel.text!)! + 1
+        self.setFavCountLabel(count, liked: true)
+        self.delegate?.tweetCell?(self, didChangeFav: true, favCount: count)
       })
     }
   }
@@ -133,7 +142,9 @@ class TweetCell: UITableViewCell {
           
           TwitterClient.sharedInstance.unretweet(retweetedId!, completion: { (response, error) -> () in
             if response != nil {
-              self.setRetweetCountLabel(Int(self.retweetCountLabel.text!)! - 1, retweeted: false)
+              let count = Int(self.retweetCountLabel.text!)! - 1
+              self.setRetweetCountLabel(count, retweeted: false)
+              self.delegate?.tweetCell?(self, didChangeRetweet: false, retweetCount: count)
             }
           })
         }
@@ -144,7 +155,9 @@ class TweetCell: UITableViewCell {
       // Retweet it
       TwitterClient.sharedInstance.retweetStatus(tweetId, completion: { (response, error) -> () in
         if response != nil {
-          self.setRetweetCountLabel(Int(self.retweetCountLabel.text!)! + 1, retweeted: true)
+          let count = Int(self.retweetCountLabel.text!)! + 1
+          self.setRetweetCountLabel(count, retweeted: true)
+          self.delegate?.tweetCell?(self, didChangeRetweet: true, retweetCount: count)
         }
       })
     }

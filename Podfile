@@ -7,5 +7,5 @@ target 'BlueBird' do
   pod "AFNetworking"
   pod "BDBOAuth1Manager"
   pod 'MBProgressHUD', '~> 0.9.1'
-  pod "Cartography"
+  # pod "Cartography"
 end
