@@ -2,7 +2,7 @@
 
 This is a basic twitter app to read and compose tweets the [Twitter API](https://apps.twitter.com/).
 
-Time spent: `16hr`
+Time spent: `20hr`
 
 ### Features
 
@@ -29,3 +29,9 @@ Time spent: `16hr`
 ### Walkthrough
 
 ![Video Walkthrough](BlueBird.gif)
+
+Credits
+---------
+* [AFNetworking](https://github.com/AFNetworking/AFNetworking)
+* [MBProgressHUD](https://github.com/jdg/MBProgressHUD)
+* [BDBOAuth1Manager](https://github.com/bdbergeron/BDBOAuth1Manager)
