@@ -24,7 +24,7 @@ class TweetViewController: UIViewController {
   @IBOutlet weak var replyToLabel: UILabel!
   @IBOutlet weak var messageHeight: NSLayoutConstraint!
   
-  var kbHeight: CGFloat!
+  var kbHeight: CGFloat! = 0.0
   var screenName: String!
   weak var delegate: TweetViewControllerDelegate?
   
@@ -52,7 +52,6 @@ class TweetViewController: UIViewController {
     NSNotificationCenter.defaultCenter().addObserver(self,
       selector: "keyboardHiden:", name: UIKeyboardDidHideNotification, object: nil)
     messageTextView.delegate = self
-    
     
   }
   
