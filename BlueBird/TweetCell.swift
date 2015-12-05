@@ -26,9 +26,13 @@ class TweetCell: UITableViewCell {
   @IBOutlet weak var retweetedByLabel: UILabel!
   @IBOutlet weak var retweetButton: UIButton!
   @IBOutlet weak var favButton: UIButton!
+  @IBOutlet weak var mediaView: UIImageView!
+  
   
   @IBOutlet weak var retweetedImageHeight: NSLayoutConstraint!
   @IBOutlet weak var retweetedImageToAvatar: NSLayoutConstraint!
+  @IBOutlet weak var mediaViewToReply: NSLayoutConstraint!
+  @IBOutlet weak var mediaViewHeight: NSLayoutConstraint!
   
   weak var delegate: TweetCellDelegate?
   var tweetId: NSNumber!
@@ -69,6 +73,19 @@ class TweetCell: UITableViewCell {
           retweetedByLabel.text = tweet.retweetedBy! + " retweeted"
         }
         
+      }
+      
+      // Load the image if available
+      if tweet.imageURL != nil {
+        mediaView.setImageWithURL(tweet.imageURL!)
+        let imageWidth = mediaView.frame.size.width
+        mediaViewHeight.constant = imageWidth * 9 / 16
+        mediaViewToReply.constant = 3
+        mediaView.layer.cornerRadius = 8
+        mediaView.clipsToBounds = true
+      } else {
+        mediaViewHeight.constant = 0
+        mediaViewToReply.constant = 0
       }
       
       tweetId = tweet.tweetId

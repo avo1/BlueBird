@@ -22,6 +22,7 @@ class Tweet: NSObject {
   var retweetedBy: String?
   var tweetId: NSNumber?
   var tweetIdStr: String?
+  var imageURL: NSURL?
   
   //retweeted_status: if avail -> retweeted
   
@@ -64,6 +65,17 @@ class Tweet: NSObject {
       timeSinceCreated = String(Int(elapsedTime / 60 / 60)) + "h"
     } else {
       timeSinceCreated = String(Int(elapsedTime / 60 / 60 / 24)) + "d"
+    }
+    
+    // For debuging
+    //    if tweetIdStr == "672038071664119809" {
+    //      print("stop here for debug")
+    //    }
+    
+    if let media = dictionary["extended_entities"] as? NSDictionary {
+      if media["media"]![0]["type"] as! String == "photo" {
+        imageURL = NSURL(string: (media["media"]![0]["media_url_https"] as? String)!)
+      }
     }
   }
   
