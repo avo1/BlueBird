@@ -39,7 +39,6 @@
 		187FA49F1C037565004919BD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		18A13BFD1C06122D00954B55 /* MyColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyColors.swift; sourceTree = "<group>"; };
 		18A13BFF1C0619A300954B55 /* TweetCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCell.swift; sourceTree = "<group>"; };
-		18E179CF1C037A3C0050BBF0 /* BlueBird-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BlueBird-Bridging-Header.h"; sourceTree = "<group>"; };
 		18E179D31C037AD80050BBF0 /* TwitterClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwitterClient.swift; sourceTree = "<group>"; };
 		18E179D51C04B29B0050BBF0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		18E179D81C04B3FA0050BBF0 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
@@ -92,7 +91,6 @@
 				187FA49A1C037565004919BD /* Assets.xcassets */,
 				187FA49C1C037565004919BD /* LaunchScreen.storyboard */,
 				187FA49F1C037565004919BD /* Info.plist */,
-				18E179CF1C037A3C0050BBF0 /* BlueBird-Bridging-Header.h */,
 			);
 			path = BlueBird;
 			sourceTree = "<group>";
@@ -404,7 +402,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.drm.BlueBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "BlueBird/BlueBird-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -420,7 +417,6 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.drm.BlueBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "BlueBird/BlueBird-Bridging-Header.h";
 			};
 			name = Release;
 		};
