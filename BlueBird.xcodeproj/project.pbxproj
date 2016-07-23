@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		183CBE061C0AE82A00FFA84D /* NewTweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183CBE051C0AE82A00FFA84D /* NewTweetViewController.swift */; };
 		183CBE081C0CA69500FFA84D /* TweetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183CBE071C0CA69500FFA84D /* TweetViewController.swift */; };
+		186031C91D432F2F006093C9 /* SparkButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186031C71D432F2F006093C9 /* SparkButton.swift */; };
+		186031CA1D432F2F006093C9 /* SparkView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 186031C81D432F2F006093C9 /* SparkView.swift */; };
 		187FA4941C037565004919BD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FA4931C037565004919BD /* AppDelegate.swift */; };
 		187FA4961C037565004919BD /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 187FA4951C037565004919BD /* LoginViewController.swift */; };
 		187FA4991C037565004919BD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 187FA4971C037565004919BD /* Main.storyboard */; };
@@ -20,12 +22,14 @@
 		18E179D61C04B29B0050BBF0 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E179D51C04B29B0050BBF0 /* User.swift */; };
 		18E179D91C04B3FA0050BBF0 /* Tweet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E179D81C04B3FA0050BBF0 /* Tweet.swift */; };
 		18E179DC1C04CE150050BBF0 /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E179DB1C04CE150050BBF0 /* TimelineViewController.swift */; };
-		FC2623F367F13AAC98B22A41 /* Pods_BlueBird.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 518C61927DF051AA3D512904 /* Pods_BlueBird.framework */; };
+		5FDF4AC21808F13D67CF7F08 /* Pods_BlueBird.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7862F2CC13A80D649F7663A2 /* Pods_BlueBird.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		183CBE051C0AE82A00FFA84D /* NewTweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTweetViewController.swift; sourceTree = "<group>"; };
 		183CBE071C0CA69500FFA84D /* TweetViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetViewController.swift; sourceTree = "<group>"; };
+		186031C71D432F2F006093C9 /* SparkButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkButton.swift; sourceTree = "<group>"; };
+		186031C81D432F2F006093C9 /* SparkView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SparkView.swift; sourceTree = "<group>"; };
 		187FA4901C037565004919BD /* BlueBird.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BlueBird.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		187FA4931C037565004919BD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		187FA4951C037565004919BD /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -40,9 +44,9 @@
 		18E179D51C04B29B0050BBF0 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		18E179D81C04B3FA0050BBF0 /* Tweet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tweet.swift; sourceTree = "<group>"; };
 		18E179DB1C04CE150050BBF0 /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
-		518C61927DF051AA3D512904 /* Pods_BlueBird.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlueBird.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		A7D57FE20A9A3DA85F4FF8BA /* Pods-BlueBird.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlueBird.release.xcconfig"; path = "Pods/Target Support Files/Pods-BlueBird/Pods-BlueBird.release.xcconfig"; sourceTree = "<group>"; };
-		BF12AFA753B773549404A6D7 /* Pods-BlueBird.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlueBird.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BlueBird/Pods-BlueBird.debug.xcconfig"; sourceTree = "<group>"; };
+		481E7B8A2B05C6CDB4E0D304 /* Pods-BlueBird.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlueBird.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BlueBird/Pods-BlueBird.debug.xcconfig"; sourceTree = "<group>"; };
+		7862F2CC13A80D649F7663A2 /* Pods_BlueBird.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BlueBird.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCDBD074A9BDA797014B4375 /* Pods-BlueBird.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BlueBird.release.xcconfig"; path = "Pods/Target Support Files/Pods-BlueBird/Pods-BlueBird.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,7 +54,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC2623F367F13AAC98B22A41 /* Pods_BlueBird.framework in Frameworks */,
+				5FDF4AC21808F13D67CF7F08 /* Pods_BlueBird.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -62,8 +66,8 @@
 			children = (
 				187FA4921C037565004919BD /* BlueBird */,
 				187FA4911C037565004919BD /* Products */,
-				3ACE8B274E6E994709834E7C /* Pods */,
-				2F0F6B3DCCD5D53357852374 /* Frameworks */,
+				9A5E7387F92E7DF0B45D419A /* Pods */,
+				68B45F79475193917F4D1553 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -97,6 +101,8 @@
 			isa = PBXGroup;
 			children = (
 				18A13BFF1C0619A300954B55 /* TweetCell.swift */,
+				186031C71D432F2F006093C9 /* SparkButton.swift */,
+				186031C81D432F2F006093C9 /* SparkView.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -129,19 +135,19 @@
 			name = ViewControllers;
 			sourceTree = "<group>";
 		};
-		2F0F6B3DCCD5D53357852374 /* Frameworks */ = {
+		68B45F79475193917F4D1553 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				518C61927DF051AA3D512904 /* Pods_BlueBird.framework */,
+				7862F2CC13A80D649F7663A2 /* Pods_BlueBird.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		3ACE8B274E6E994709834E7C /* Pods */ = {
+		9A5E7387F92E7DF0B45D419A /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				BF12AFA753B773549404A6D7 /* Pods-BlueBird.debug.xcconfig */,
-				A7D57FE20A9A3DA85F4FF8BA /* Pods-BlueBird.release.xcconfig */,
+				481E7B8A2B05C6CDB4E0D304 /* Pods-BlueBird.debug.xcconfig */,
+				BCDBD074A9BDA797014B4375 /* Pods-BlueBird.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -153,12 +159,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 187FA4A21C037565004919BD /* Build configuration list for PBXNativeTarget "BlueBird" */;
 			buildPhases = (
-				5565AD76B025F2F523CDF817 /* Check Pods Manifest.lock */,
+				6F202BF5AABABDFE5564FA5F /* [CP] Check Pods Manifest.lock */,
 				187FA48C1C037565004919BD /* Sources */,
 				187FA48D1C037565004919BD /* Frameworks */,
 				187FA48E1C037565004919BD /* Resources */,
-				7429458952540D8B2B387962 /* Embed Pods Frameworks */,
-				398D9E0D94B4F2B3CFFAB3EC /* Copy Pods Resources */,
+				D8FB73C71F91CD78317F0E0D /* [CP] Embed Pods Frameworks */,
+				106C5BC5EBF8699C105173A0 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -217,14 +223,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		398D9E0D94B4F2B3CFFAB3EC /* Copy Pods Resources */ = {
+		106C5BC5EBF8699C105173A0 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -232,14 +238,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-BlueBird/Pods-BlueBird-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5565AD76B025F2F523CDF817 /* Check Pods Manifest.lock */ = {
+		6F202BF5AABABDFE5564FA5F /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -247,14 +253,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		7429458952540D8B2B387962 /* Embed Pods Frameworks */ = {
+		D8FB73C71F91CD78317F0E0D /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,7 +275,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				186031C91D432F2F006093C9 /* SparkButton.swift in Sources */,
 				18E179D61C04B29B0050BBF0 /* User.swift in Sources */,
+				186031CA1D432F2F006093C9 /* SparkView.swift in Sources */,
 				18E179D91C04B3FA0050BBF0 /* Tweet.swift in Sources */,
 				183CBE081C0CA69500FFA84D /* TweetViewController.swift in Sources */,
 				18E179DC1C04CE150050BBF0 /* TimelineViewController.swift in Sources */,
@@ -387,11 +395,12 @@
 		};
 		187FA4A31C037565004919BD /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = BF12AFA753B773549404A6D7 /* Pods-BlueBird.debug.xcconfig */;
+			baseConfigurationReference = 481E7B8A2B05C6CDB4E0D304 /* Pods-BlueBird.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = BlueBird/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.drm.BlueBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -402,11 +411,12 @@
 		};
 		187FA4A41C037565004919BD /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A7D57FE20A9A3DA85F4FF8BA /* Pods-BlueBird.release.xcconfig */;
+			baseConfigurationReference = BCDBD074A9BDA797014B4375 /* Pods-BlueBird.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = BlueBird/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.drm.BlueBird;
 				PRODUCT_NAME = "$(TARGET_NAME)";
